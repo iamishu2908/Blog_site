@@ -1,7 +1,7 @@
 from .database import Base
 from sqlalchemy import Column, Integer, String, DateTime
 
-class DbPost(Base): # table structure for post method
+class DbPost(Base): # table structure for stroing blogposts
     __tablename__ = "Post"
     id = Column(Integer, primary_key=True,index=True)
     image_url = Column(String)

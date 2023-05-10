@@ -1,7 +1,8 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class PostBase(BaseModel): # this schema shows what you can extract from a post api request
+class PostBase(BaseModel): # this schema shows what you can extract from an api request 
+    # Note : Post method and Posts (blog) are different
     title: str
     content: str
     image_url: str
