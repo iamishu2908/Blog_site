@@ -3,6 +3,8 @@ from database import models
 from database.database import engine
 from routers import post
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
 
 app.include_router(post.router)
@@ -22,3 +24,21 @@ models.Base.metadata.create_all(engine) # this is not related with schemas.py
 app.mount('/images', StaticFiles(directory= 'images'),name = 'images')
 #  maps a URL path to a static directory in order to serve static files to the client.
 # When a request is made to the '/images' URL path, the ASGI server will serve the corresponding file from the directory located at './images'
+
+origins = [ 
+    'https.//localhost:3000' # url for react application
+]
+
+app.add_middleware(
+    CORSMiddleware = origins,
+    allow_origins = origins,
+    allo_credentials = True,
+    allow_methods = ['*'],
+    allow_headers = ['*']
+)
+
+# CORS occurs when we develop both frontend and backend on same computer.
+# We dont host our backend on a server as of now and use local server itself.
+# Parallely, we try make reuest from frontend application running on the server to the same endpoint.
+# this causes the Cross-origin sharing error.
+# hence, we define the origin for frontend and backend seperately
