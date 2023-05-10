@@ -30,11 +30,11 @@ origins = [
 ]
 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins = origins,
-    allow_credentials = True,
-    allow_methods = ['*'],
-    allow_headers = ['*']
+  CORSMiddleware,
+  allow_origins=origins,
+  allow_credentials=True,
+  allow_methods=['*'],
+  allow_headers=['*']
 )
 
 # CORS occurs when we develop both frontend and backend on same computer.
