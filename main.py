@@ -7,9 +7,6 @@ app = FastAPI()
 
 app.include_router(post.router)
 
-@app.get('/')
-def hello_world():
-    return 'Hello World'
 
 models.Base.metadata.create_all(engine) # this is not related with schemas.py
 '''
