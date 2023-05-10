@@ -2,6 +2,7 @@ from routers.schemas import PostBase # to add data to db
 from sqlalchemy.orm.session import Session
 import datetime
 from database.models import DbPost
+from fastapi import HTTPException,status
 
 #   Create new post
 
@@ -20,3 +21,12 @@ def create(db: Session, request: PostBase):
 
 def get_all(db: Session):
     return db.query(DbPost).all()
+
+def delete(id: int,db: Session): 
+    #   we need to make sure that post exists before we delete it
+    post = db.query(DbPost).filter(DbPost.id == id).first()
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = f'Ooops! Post with id {id} not found!')
+    db.delete(post)
+    db.commit()
+    return 'ok'
