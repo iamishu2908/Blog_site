@@ -1,8 +1,8 @@
 '''
-This code sets up a database connection using SQLAlchemy, a popular Object Relational Mapping (ORM) tool.
-SQLAlchemy is a library that facilitates the communication between Python programs and databases. 
-Most of the times, this library is used as an Object Relational Mapper (ORM) tool that translates Python classes to tables on relational databases and automatically converts function calls to SQL statements.
-Using SQLAlchemy, we have no restriction on what db to use for our project.
+    This code sets up a database connection using SQLAlchemy, a popular Object Relational Mapping (ORM) tool.
+    SQLAlchemy is a library that facilitates the communication between Python programs and databases. 
+    Most of the times, this library is used as an Object Relational Mapper (ORM) tool that translates Python classes to tables on relational databases and automatically converts function calls to SQL statements.
+    Using SQLAlchemy, we have no restriction on what db to use for our project.
 
 '''
 from sqlalchemy import create_engine # This function is used to create a database engine, which handles the connection to the database and execution of SQL commands.
