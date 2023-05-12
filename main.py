@@ -26,15 +26,15 @@ app.mount('/images', StaticFiles(directory= 'images'),name = 'images')
 # When a request is made to the '/images' URL path, the ASGI server will serve the corresponding file from the directory located at './images'
 
 origins = [ 
-    'https.//localhost:3000' # url for react application
+    'http://localhost:3000/' # url for react application
 ]
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=origins,
+  allow_origins=['*'],
   allow_credentials=True,
   allow_methods=['*'],
-  allow_headers=['*']
+  allow_headers=['*'],
 )
 
 # CORS occurs when we develop both frontend and backend on same computer.
