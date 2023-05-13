@@ -21,24 +21,27 @@ models.Base.metadata.create_all(engine) # this is not related with schemas.py
     # create_all(): This is a method of the metadata object that creates all the tables defined in the metadata object.
     # engine: This is the instance of the create_engine class that represents the database connection, which is used to execute SQL statements to create the tables in the database.
 
-app.mount('/images', StaticFiles(directory= 'images'),name = 'images')
-#  maps a URL path to a static directory in order to serve static files to the client.
-# When a request is made to the '/images' URL path, the ASGI server will serve the corresponding file from the directory located at './images'
+# app.mount('/images', StaticFiles(directory= 'images'),name = 'images')
+# #  maps a URL path to a static directory in order to serve static files to the client.
+# # When a request is made to the '/images' URL path, the ASGI server will serve the corresponding file from the directory located at './images'
 
-origins = [ 
-    'https.//localhost:3000' # url for react application
-]
+
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=origins,
+  allow_origins= "http://localhost:3000/",
   allow_credentials=True,
   allow_methods=['*'],
-  allow_headers=['*']
+  allow_headers=['*'],
+  expose_headers =  "http://localhost:3000/",
 )
 
-# CORS occurs when we develop both frontend and backend on same computer.
-# We dont host our backend on a server as of now and use local server itself.
-# Parallely, we try make reuest from frontend application running on the server to the same endpoint.
-# this causes the Cross-origin sharing error.
-# hence, we define the origin for frontend and backend seperately
+# CORS - Cross origin resource sharing. It causes security vulneraility in a website.
+# How ?
+# Example : Submitting a form at gforms.com should make a submit request at gorms.com only and not in any other website.
+# Hackers might try to hack your website and change your website in such a way that, on click of the submit button in ur gform, your details can
+# go to their webiste and get stored there.Thus, the response and request must be from the same website - same origin.
+# This is something that a browser automatically checks to avoid CORS.
+# In development, having a single server is not possible as we are not hposting it under a single domain name (whcih handles both frontened and backend)
+# here, we have localhost:3000 for fronten and 8000 for backend. So to fix the false detection of CORS whenever we make a request from 3000 (which goes to 8000),
+# we use a CORS middleware in fastapi to declare the origins which it can allow
