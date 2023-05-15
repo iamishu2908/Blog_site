@@ -29,12 +29,13 @@ def delete(id:int,db:Session=Depends(get_db)):
 @router.post('/image')
 def upload_image(image: UploadFile = File(...)):
     # images will be stored in db, so their file names should be unique as same images shudnt be having same names
+    
     letter = string.ascii_letters # gives us all ascii letters
     rand_str = ''.join(random.choice(letter) for i in range(6))# generates 6 random letters and appends to string
     new = f'_{rand_str}.'
     filename = new.join(image.filename.rsplit('.', 1)) # adding rand_strat the end of actual image url
+    
     path = f'images/{filename}' # path used to store filenames of images
-
     with open(path, "w+b") as buffer: # write a file and over write it as buffer
         shutil.copyfileobj(image.file, buffer) # store file
 
