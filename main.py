@@ -21,6 +21,8 @@ models.Base.metadata.create_all(engine) # this is not related with schemas.py
     # create_all(): This is a method of the metadata object that creates all the tables defined in the metadata object.
     # engine: This is the instance of the create_engine class that represents the database connection, which is used to execute SQL statements to create the tables in the database.
 
+
+# 'aio files' package is used here to be able to view static files from url.
 app.mount('/images', StaticFiles(directory= 'images'),name = 'images')
 #  maps a URL path to a static directory in order to serve static files to the client.
 # When a request is made to the '/images' URL path, the ASGI server will serve the corresponding file from the directory located at './images'
